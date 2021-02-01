@@ -1,0 +1,69 @@
+body {font-family: Arial, Helvetica, sans-serif;}
+.login-form{ /*กรอบใหญ่สุด*/
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    width:480px;
+    margin:10vh auto;
+}
+.login-input{ /*กรอบinput*/
+    display: flex;
+    align-items: center;
+    flex-direction: column; 
+    justify-content: center;
+    width: 100%;
+    min-height: 100%;
+    padding: 12px; 
+}
+.login-input input{  /*input*/
+    border: none;
+    width: 360px;
+    height: 50px;
+    font-weight: bold;
+    background-color: rgb(238, 239, 240);
+    padding:0px 0px 0px 20px;
+}
+.login-button{  /*ปุ่มกด*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;    
+}
+.sigbut{ /*signin.html  button*/
+    width: 140px;
+    height: 50px;
+}
+.logbut{ /*login.html  button*/
+    width: 360px;
+    height: 50px;
+}
+.remember input{
+    width: 15px;
+    height: 14px;
+}
+
+.remember{
+    font-size: 14px;
+    max-width: 360px;
+    margin: 0 auto;
+}
+/* alert */
+.alert{
+    width: 384px; 
+    height: 50px;
+    font-weight: bold;
+    margin-left: 13px;
+}
+.container {
+    max-width: 500px;
+}
+.sign-input input{  /*input*/
+    border: none;
+    font-weight: bold;
+    background-color: rgb(238, 239, 240);
+    height: 50px;
+    padding-left: 20px;
+}
+.inputselect{ /*select*/
+    background-color: rgb(238, 239, 240);
+    width: 384px;
+    height: 50px;
+}

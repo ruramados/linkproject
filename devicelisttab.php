@@ -1,10 +1,11 @@
- <?php  include('dbb.php'); ?> 
+ <?php    session_start();
+          include('dbb.php'); ?> 
         <!-- Tab panes -->
         <div class="tab-content">
           <div id="admin" class=" tab-pane active"><br>
           <div class="col-md-8 px-4">
             <h4 class="mb-3">Admin</h4>
-            <form action="" post="post">
+            <form action="" method="post" enctype="multipart/form-data">
               <div class="row">
                 <div class="mb-3">
                   <label for="customer_name">Customer Name</label>
@@ -70,7 +71,6 @@
                     <option></option><option>สวนหลวง</option></select>
                 </div>
                
-                
                 <hr class="mb-4">
                 <h4 class="mb-3"> Location</h4>
                 <div class="col-md-4 mb-3">
@@ -120,46 +120,37 @@
             </div>
         </div>
 <?php
-        if (isset($_REQUEST['admin_add'])) {
-          $file_name = $_FILES['customFile']['name'];
-
-         echo ("<script LANGUAGE='JavaScript'>
-         window.alert(".$file_name.");
-         window.location.href='checkstock.php';
-         </script>");         
-          
-        }
- ?>   
- <?php
-    if (isset($_POST['stock_add'])) {
-        $serial = mysqli_real_escape_string($conn, $_POST['serial_no']);
-        $part = mysqli_real_escape_string($conn, $_POST['part_no']);
-        
-        $stock_check = "SELECT * FROM stock WHERE serial_number = '$serial' OR part_number = '$part' LIMIT 1";
-        $query = mysqli_query($conn, $stock_check);
-        $result = mysqli_fetch_assoc($query);
-  
-        if ($result) { // if user exists
-            if ($result['serial_number'] === $serial) {
-              echo ("<script LANGUAGE='JavaScript'>
-              window.alert('ข้อมูลซ้ำกรุณากรอกใหม่');
-              window.location.href='devicelist.php';
-              </script>");
-              }
-            if ($result['part_number'] === $part) {
-              echo ("<script LANGUAGE='JavaScript'>
-              window.alert('ข้อมูลซ้ำกรุณากรอกใหม่');
-              window.location.href='devicelist.php';
-              </script>");
-            }
+    if (isset($_POST['admin_add'])) {
+      $file_name = $_FILES['customFile']['name'];
+      $file_tmp = $_FILES['customFile']['tmp_name'];
+      $file_size = $_FILES['customFile']['size'];
+      $file_seperate = explode('.',$file_name);
+      $file_ext = strtolower(end($file_seperate));
+      $ext_allow = array('pdf');
+      $file_noExt = $file_seperate[0]; //name without extension
+      $path = "po/" . $file_name; //path to save
+      print_r($file_ext);
+      if(empty($file_name)){
+        $_SESSION['file_Err'] = "กรุณาใส่ขอมูล";
+        header('devicelisttab.php');
+      }else if(in_array($file_ext,$ext_allow)){
+        if (!file_exists($path)){
+          if ($file_size < 500000){ // check lower than 5kb
+            $path_folder = move_uploaded_file($file_tmp,$path); //store in folder
+            $stmt = $conn->prepare("INSERT INTO po (po_number,po_file) values (?,?)");
+            $stmt->bind_param("ss", $file_noExt, $path);
+            $stmt->execute();
+          }else{
+            print_r("ไม่ใช่");
+          }
         }else{
-          $sql = "INSERT INTO stock (serial_number,part_number) VALUES ('$serial', '$part')";
-          mysqli_query($conn, $sql);
-          echo ("<script LANGUAGE='JavaScript'>
-          window.alert('เพิ่มข้อมูลสำเร็จ');
-          window.location.href='checkstock.php';
-          </script>");
+          print_r("มีแล้ว");
         }
+      }else{
+        print_r("wrong format");
+      }
     }
- ?> 
+ ?>   
+ 
+
  

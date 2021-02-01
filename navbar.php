@@ -6,7 +6,7 @@
         link-project
       </a>
       <button class="navbar-toggler d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-        <i data-feather="menu"></i>
+      <i class="fa fa-bars"></i>
       </button>
       <input class="form-control my-1 w-100" id="search2" type="text" placeholder="Search" aria-label="Search">
   </div>

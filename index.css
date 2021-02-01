@@ -47,19 +47,29 @@ body{font-family: Arial, Helvetica, sans-serif;
   tr:nth-child(even).searchcolor{
     background-color:rgb(238, 239, 240);
   }
-  .btn{
+  .button-circle{ /* custom button */
     border: 1px solid rgb(206, 204, 204);
     background-color: white;
     color: rgb(137, 137, 137);
     border-radius: 12px;
     }
+    .btn:focus { /* remove active border */
+      outline: none;
+      box-shadow: none;
+    }
 /* -------------sidebar --------------------------*/
-
-.userrole_bg{  /* สีพื้นหลังโรล*/
-  background-color: #0d77e3;
-}
 .info-text .nav-item{ /* สีคำเทา*/
   color: rgb(137, 137, 137);
+}
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  /* rtl:remove */
+  left: 0;
+  z-index: 100; /* Behind the navbar */
+  padding: 48px 0 0; /* Height of navbar */
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
 }
 /* ---search bar------*/
 .searchbar{ 
@@ -88,7 +98,7 @@ body{font-family: Arial, Helvetica, sans-serif;
     align-items: center;
     color:rgb(179, 179, 179);
     }
-#search,#search1,#search2{
+#search,#search1,#search2,#serial{
   text-align: right;
 }
 :-ms-input-placeholder { /* Internet Explorer 10-11 */
@@ -123,17 +133,12 @@ body{font-family: Arial, Helvetica, sans-serif;
       margin-top: 10px;
       width: 100%;
     }
+    .sidebar{
+      position:static;
+    }
 }
-/* -----google map-----*/
-
-#googlemap{
-    max-width: 100%;
-}
-.modal-header{
-    border-bottom: none;
-    padding: 0;
-}
-.button{
+/* ----- close icon-----*/
+.buttonclose ,.buttonsearch{
     background: none !important;
     border: none ;
     outline: 0 !important; 
@@ -146,4 +151,8 @@ body{font-family: Arial, Helvetica, sans-serif;
 .close {
   color: #aaaaaa;
   font-size: 28px;
+}
+/* card info padding*/
+.card-pad{
+  padding: 40px;
 }
